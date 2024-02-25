@@ -6,9 +6,6 @@ body {
     color: #3E363F;
 }
 
-h1 {
-    color: blue;
-}
 
 #contenedor {
     width: 900px;
@@ -71,13 +68,13 @@ button:active {
     transform: scale(0.95);
 }
 
-#error{
+#error {
     color: red;
     font-weight: bold;
     display: none;
 }
 
-.resultado{
+.resultado {
     color: #0A81D1;
     font-weight: bold;
     font-size: 25px;
