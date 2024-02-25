@@ -1,5 +1,6 @@
 const CALCULAR = document.getElementById('calcular');
 const ERROR = document.getElementById('error');
+const VOL = document.getElementById('vol');
 const FLU = document.getElementById('flu');
 const MAN = document.getElementById('man');
 
@@ -10,9 +11,11 @@ CALCULAR.addEventListener('click', () => {
         if (DATO > 0) {
             ERROR.style.display = 'none'
             let flujo = calcFlujo(DATO);
-            let mantenimiento = flujo * 1.5;
-            FLU.innerHTML = flujo + ' cc/hr';
+            let mantenimiento = Math.ceil((flujo / 24) * 1.5);
+            VOL.innerHTML = flujo + " cc";
+            FLU.innerHTML = Math.ceil(flujo / 24) + ' cc/hr';
             MAN.innerHTML = 'm+m/2 ' + mantenimiento + ' cc/hr';
+            VOL.style.display = 'block';
             FLU.style.display = 'block';
             MAN.style.display = 'block';
         } else {
@@ -23,12 +26,14 @@ CALCULAR.addEventListener('click', () => {
     }
     else {
         console.log("Mayor que 30")
-        const SC = ((DATO * 4) + 7) / (DATO + 90)
+        const SC = ((DATO * 4) + 7) / (DATO * 1 + 90)
         let m1500 = Math.ceil(SC * 1500)
         let m2000 = Math.ceil(SC * 2000)
 
-        FLU.innerHTML = "Multiplicado por 1500 = " + m1500 + ' cc/hr';
-        MAN.innerHTML = "Multiplicado por 2000 = " + m2000 + ' cc/hr';
+        VOL.innerHTML = "VOLUMEN DIARIO (POR SUPERFICIE CORPORAL)"
+        FLU.innerHTML = "Multiplicado por 1500 = " + m1500 + ' cc';
+        MAN.innerHTML = "Multiplicado por 2000 = " + m2000 + ' cc';
+        VOL.style.display = 'block';
         FLU.style.display = 'block';
         MAN.style.display = 'block';
 
@@ -47,5 +52,5 @@ function calcFlujo(peso) {
         flujo = (peso - 20) * 20 + 1500
     }
 
-    return Math.ceil(flujo / 24)
+    return flujo
 }
